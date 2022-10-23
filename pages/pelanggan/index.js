@@ -36,6 +36,7 @@ const Pelanggan = () => {
       dataIndex: "key",
       key: "key",
       width: 200,
+      render: (_, record) => `PELANGGAN_${record.key}`,
     },
     {
       title: "Nama",

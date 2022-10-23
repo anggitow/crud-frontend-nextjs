@@ -36,6 +36,7 @@ const Barang = () => {
       dataIndex: "key",
       key: "key",
       width: 200,
+      render: (_, record) => `BRG_${record.key}`,
     },
     {
       title: "Nama",
