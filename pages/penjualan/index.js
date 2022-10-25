@@ -1,5 +1,4 @@
-import { DownOutlined } from "@ant-design/icons";
-import { Badge, Button, Dropdown, Popconfirm, Space, Table } from "antd";
+import { Button, notification, Popconfirm, Table } from "antd";
 import Head from "next/head";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -7,6 +6,29 @@ import { useEffect, useState } from "react";
 const Penjualan = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const handleDelete = async (id) => {
+    setLoading(true);
+    const request = await fetch(
+      `http://127.0.0.1:8000/api/penjualan/destroy/${id}`
+    );
+    const response = await request.json();
+    if (response.success) {
+      notification.success({
+        message: "Sukses",
+        description: response.message,
+        placement: "top",
+      });
+      fetchData();
+    } else {
+      notification.error({
+        message: "Gagal",
+        description: response.message,
+        placement: "top",
+      });
+    }
+    setLoading(false);
+  };
 
   const columns = [
     {
